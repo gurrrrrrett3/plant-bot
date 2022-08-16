@@ -92,11 +92,7 @@ async function water(interaction: ChatInputCommandInteraction) {
   data.waterLevel += randomInt(10, 30);
   data.lastFed = Date.now();
 
-  if (data.waterLevel > 100) {
-    // overwatered
-    data.life -= randomInt(1, 3);
-  }
-
+  
   saveData(data);
   await setStatus();
 
