@@ -92,7 +92,8 @@ async function tick() {
 
 async function water(interaction: ChatInputCommandInteraction) {
   const data = loadData();
-  data.waterLevel += randomInt(10, 30);
+  if (!data.dead) {
+    data.waterLevel += randomInt(10, 30);
   data.lastFed = Date.now();
 
   
@@ -100,6 +101,7 @@ async function water(interaction: ChatInputCommandInteraction) {
   await setStatus();
 
   interaction.reply("💧");
+  }
 }
 
 async function reset(interaction: ChatInputCommandInteraction) {
@@ -150,11 +152,12 @@ function loadData() {
     life: number;
     lastFed: number;
     waterLevel: number;
+    dead: boolean;
   };
 
   return data;
 }
 
-function saveData(data: { life: number; lastFed: number; waterLevel: number }) {
+function saveData(data: { life: number; lastFed: number; waterLevel: number, dead: boolean }) {
   fs.writeFileSync("./data.json", JSON.stringify(data));
 }
