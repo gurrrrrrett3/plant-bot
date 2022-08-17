@@ -79,7 +79,7 @@ async function tick() {
     data.life -= randomInt(1, 3);
   } else if (data.waterLevel > 150) {
     // super overwatered
-    data.life -= randomInt(5, data.waterLevel / 10);
+    data.life -= Math.floor(data.waterLevel / 10);
   }
 
   if (data.life < 0) {
