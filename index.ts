@@ -58,6 +58,7 @@ client.on("interactionCreate", async (interaction) => {
 
 async function tick() {
   const data = loadData();
+  if (data.dead) return;
   data.waterLevel -= randomInt(5, 10);
 
   if (data.waterLevel < 0) {
@@ -109,6 +110,7 @@ async function reset(interaction: ChatInputCommandInteraction) {
   data.life = 100;
   data.lastFed = Date.now();
   data.waterLevel = 50;
+  data.dead = false
   saveData(data);
 
   interaction.reply("✅");
